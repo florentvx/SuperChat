@@ -1,0 +1,77 @@
+{% extends 'accounts/main.html' %}
+
+{% block content %}
+
+{% include 'accounts/status.html' %}
+
+<br>
+
+<div class="row">
+    <div class="col-md-5">
+        <h5>CHATTERS:</h5>
+        <hr>
+        <div class="card card-body">
+            <a class="btn btn-primary btn-sm btn-block" href=""> Find CHATTER
+            </a>
+            <table class="table table-sm">
+                <tr>
+                    <th>Name</th>
+                    <th>DateCreated</th>
+                    <th>Page</th>
+                </tr>
+
+                {% for chatter in chatters %}
+                <tr>
+                    <td>{{ chatter.Name }}</td>
+                    <td>{{ chatter.DateCreated }}</td>
+                    <td><a class="btn btn-sm btn-info" href="{% url 'chatter' chatter.id %}">Link</a> </td>
+                </tr>
+
+                {% endfor %}
+
+            </table>
+        </div>
+    </div>
+
+    <div class="col-md-7">
+        <h5>CHATS:</h5>
+        <hr>
+        <div class="card card-body">
+            <form method="GET">
+                <label>Name:</label>
+                <input name="name" type="text" size="15">
+                <label>From:</label>
+                <input name="from_date" type="date">
+                <label>To:</label>
+                <input name="to_date" type="date">
+                <button class="btn btn-primary" type="submit">
+                    Search
+                </button>
+            </form>
+        </div>
+        <br>
+        <div class="card card-body">
+            <table class="table table-sm">
+                <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Host</th>
+                    <th>Start Time</th>
+                    <th>Delete</th>
+                </tr>
+
+                {% for chat in chats %}
+                <tr>
+                    <td><a class="btn btn-sm btn-info" href="{% url 'chat' chat.id %}">Join</a> </td>
+                    <td>{{chat.Name}}</td>
+                    <td>{{chat.Host}}</td>
+                    <td>{{chat.DateCreated}}</td>
+                    <td><a class="btn btn-sm btn-danger" href="{% url 'delete_chat' chat.id %}">Delete</a> </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'accounts/main.html' %}
+
+{% block content %}
+
+<br>
+
+<div class="row">
+    <div class="col-md">
+        <div class="card card-body">
+            <h5>Actions</h5>
+            <hr>
+            <a class="btn btn-outline-info btn-sm btn-block"
+               href="{% url 'create_chat' chatter.id %}">
+                Create Chat
+            </a>
+        </div>
+    </div>
+    <div class ="col-md">
+        <div class="card card-body">
+            <h5>Contact Information</h5>
+            <hr>
+            <p>Name: {{chatter.Name}}</p>
+            <p>Email: {{chatter.Email}}</p>
+        </div>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class ="col-md">
+        <div class="card card-body">
+            <table class="table">
+                <tr>
+                    <th>Chat Name</th>
+                    <th>Creation Date</th>
+                    <th>Update</th>
+                    <th>Join</th>
+                </tr>
+                {% for item in chats %}
+                <tr>
+                    <th>{{item.Name}}</th>
+                    <th>{{item.DateCreated}}</th>
+                    <th><a class="btn btn-sm btn-info" href="{% url 'update_chat' item.id %}">Update</a> </th>
+                    <th><a class="btn btn-sm btn-info" href="{% url 'chat' item.id %}">Link</a></th>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
